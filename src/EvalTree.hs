@@ -61,6 +61,14 @@ topMost z = topMost $ goUp z
 replaceSubTree :: ExprTree v e -> ExprZipper v e -> ExprZipper v e 
 replaceSubTree t (_, bs) = (t, bs)
 
+-- replace Operation at root
+replaceRootOp :: e -> ExprTree v e -> ExprTree v e
+replaceRootOp e (Op v _ l r) = Op v e l r
+replaceRootOp _ (Val v) = Val v
+
+replaceOpAt :: e -> ExprZipper v e -> ExprZipper v e
+replaceOpAt e (t, bs) = (replaceRootOp e t, bs)
+
 -- Reverse function application
 (-:) :: t1 -> (t1 -> t2) -> t2
 x -: f = f x

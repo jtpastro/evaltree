@@ -1,13 +1,6 @@
 module Main (main) where
 import EvalTree
-    ( ExprTree(Val, Op),
-      zipper,
-      goLeft,
-      goRight,
-      topMost,
-      replaceSubTree,
-      (-:),
-      reEvalZipper )
+
 import Expr
 
 -- Testing
@@ -36,6 +29,12 @@ tree3 = zipper3 -: topMost -: fst
 -- resulting tree from reevaluating zipper2
 tree4 = zipper3 -: reEvalZipper -: fst
 
+-- replace op at root of tree1
+tree5 = tree1 -: replaceRootOp (-) -: evalRoot
+
+-- replace op at root of tree1
+tree6 = zipper2 -: goUp -: replaceOpAt (-) -: reEvalZipper -: fst
+
 main :: IO ()
 main = do
     print expr1
@@ -44,3 +43,5 @@ main = do
     print zipper2
     print tree3
     print tree4
+    print tree5
+    print tree6
