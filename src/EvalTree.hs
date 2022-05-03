@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 module EvalTree where
 
--- An ExprTree is composed by branches Op and leaves Val
+-- An ExprTree is composed of branches Op and leaves Val
 -- Val holds atomic values
 -- Op holds a value, an expression and its left and right children of type ExprTree 
 data ExprTree v e = Val v | Op v e (ExprTree v e) (ExprTree v e) deriving (Eq, Show)
